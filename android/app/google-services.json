@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "716078122290",
+    "firebase_url": "https://parking-app-official-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "parking-app-official",
+    "storage_bucket": "parking-app-official.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716078122290:android:b4ca7b3e8e86a02d36832b",
+        "android_client_info": {
+          "package_name": "com.example.parking_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "716078122290-mt1grrk5jl0iqjo0if54rk15afnl8gh3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbXvxLUtNntcJzwR3qv4V3-wYJspKaYIY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "716078122290-mt1grrk5jl0iqjo0if54rk15afnl8gh3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
