@@ -19,27 +19,41 @@ class _FirstScreenState extends State<FirstScreen> {
   @override
   void initState() {
     super.initState();
-    final p1 = {'01': {'occupied': false},'02': {'occupied': false},'03': {'occupied': false},'04': {'occupied': false},'05': {'occupied': false},
-    '06': {'occupied': false},'07': {'occupied': false},'08': {'occupied': false},'09': {'occupied': false},'10': {'occupied': false},
-    '11': {'occupied': false},'12': {'occupied': false},'13': {'occupied': false},'14': {'occupied': false},'15': {'occupied': false},
-    '16': {'occupied': false},'17': {'occupied': false},'18': {'occupied': false},'19': {'occupied': false},'20': {'occupied': false},};
-    final value = {'p1': p1};
-    database.update({'lots': {'p1': p1, 'p2': p1, 'p3': p1}});
+    final p1 = {
+      '01': {'occupied': false},
+      '02': {'occupied': false},
+      '03': {'occupied': false},
+      '04': {'occupied': false},
+      '05': {'occupied': false},
+      '06': {'occupied': false},
+      '07': {'occupied': false},
+      '08': {'occupied': false},
+      '09': {'occupied': false},
+      '10': {'occupied': false},
+      '11': {'occupied': false},
+      '12': {'occupied': false},
+      '13': {'occupied': false},
+      '14': {'occupied': false},
+      '15': {'occupied': false},
+      '16': {'occupied': false},
+      '17': {'occupied': false},
+      '18': {'occupied': false},
+      '19': {'occupied': false},
+      '20': {'occupied': false},
+    };
+    database.update({'p1': p1, 'p2': p1, 'p3': p1});
   }
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
-
   }
-
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-        final width = MediaQuery.of(context).size.width;
-    
+    final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -53,6 +67,10 @@ class _FirstScreenState extends State<FirstScreen> {
           Text('Number plate:'),
           TextField(
             controller: NumberPlateController,
+          ),
+          Center(
+            child: Text(
+                'Enter your name and number plate above, then click the lot below to book it'),
           ),
           Container(
             height: height * 0.6,
@@ -74,19 +92,24 @@ class _FirstScreenState extends State<FirstScreen> {
                   });
                   return ListView.builder(
                     itemBuilder: (context, index) {
-                    String info = filtered[index];
-                    String lot = info.substring(0,2);
-                    String space = info.substring(3,5);
+                      String info = filtered[index];
+                      String lot = info.substring(0, 2);
+                      String space = info.substring(3, 5);
                       // return Text('$lot $space');
                       return ListTile(
                         onTap: () {
-                          database.child('/lot/space/').update({'name': 'd', });
+                          database.child('/$lot/$space/').update({
+                            'name': '${NameController.text}',
+                            'plate number': '${NumberPlateController.text}',
+                            'occupied': true
+                          });
                         },
                         leading: Icon(Icons.car_rental),
                         title: Text('Parking lot $lot: $space'),
                       );
                     },
-                    itemCount: filtered.length,);
+                    itemCount: filtered.length,
+                  );
                 }
                 return Text('hfda');
               },
