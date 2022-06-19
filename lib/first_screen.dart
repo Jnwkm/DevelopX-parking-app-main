@@ -19,29 +19,29 @@ class _FirstScreenState extends State<FirstScreen> {
   @override
   void initState() {
     super.initState();
-    final p1 = {
-      '01': {'occupied': false},
-      '02': {'occupied': false},
-      '03': {'occupied': false},
-      '04': {'occupied': false},
-      '05': {'occupied': false},
-      '06': {'occupied': false},
-      '07': {'occupied': false},
-      '08': {'occupied': false},
-      '09': {'occupied': false},
-      '10': {'occupied': false},
-      '11': {'occupied': false},
-      '12': {'occupied': false},
-      '13': {'occupied': false},
-      '14': {'occupied': false},
-      '15': {'occupied': false},
-      '16': {'occupied': false},
-      '17': {'occupied': false},
-      '18': {'occupied': false},
-      '19': {'occupied': false},
-      '20': {'occupied': false},
-    };
-    database.update({'p1': p1, 'p2': p1, 'p3': p1});
+    // final p1 = {
+    //   '01': {'occupied': false},
+    //   '02': {'occupied': false},
+    //   '03': {'occupied': false},
+    //   '04': {'occupied': false},
+    //   '05': {'occupied': false},
+    //   '06': {'occupied': false},
+    //   '07': {'occupied': false},
+    //   '08': {'occupied': false},
+    //   '09': {'occupied': false},
+    //   '10': {'occupied': false},
+    //   '11': {'occupied': false},
+    //   '12': {'occupied': false},
+    //   '13': {'occupied': false},
+    //   '14': {'occupied': false},
+    //   '15': {'occupied': false},
+    //   '16': {'occupied': false},
+    //   '17': {'occupied': false},
+    //   '18': {'occupied': false},
+    //   '19': {'occupied': false},
+    //   '20': {'occupied': false},
+    // };
+    // database.update({'p1': p1, 'p2': p1, 'p3': p1});
   }
 
   void _onItemTapped(int index) {
@@ -57,7 +57,11 @@ class _FirstScreenState extends State<FirstScreen> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(),
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text("Book your lot here"),
+        leading: Icon(Icons.car_rental_rounded),
+      ),
       body: Column(
         children: [
           Text('Name:'),

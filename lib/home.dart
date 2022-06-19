@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:parking_app/parking_lots.dart';
 
 import 'first_screen.dart';
+import 'first_screen.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
