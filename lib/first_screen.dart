@@ -56,70 +56,71 @@ class _FirstScreenState extends State<FirstScreen> {
     final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         centerTitle: true,
         title: Text("Book your lot here"),
         leading: Icon(Icons.car_rental_rounded),
       ),
-      body: Column(
-        children: [
-          Text('Name:'),
-          TextField(
-            controller: NameController,
-          ),
-          Text('Number plate:'),
-          TextField(
-            controller: NumberPlateController,
-          ),
-          Center(
-            child: Text(
-                'Enter your name and number plate above, then click the lot below to book it'),
-          ),
-          Container(
-            height: height * 0.6,
-            child: StreamBuilder(
-              stream: database.onValue,
-              builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
-                if (snapshot.hasData) {
-                  final data = snapshot.data!.snapshot.value as Map;
-                  List filtered = [];
-                  data.forEach((key, value) {
-                    final parkingLot = key;
-                    final lot = value as Map;
-                    lot.forEach((key, value) {
-                      final number = key;
-                      if (value['occupied'] == false) {
-                        filtered.add('$parkingLot $number');
-                      }
-                    });
-                  });
-                  return ListView.builder(
-                    itemBuilder: (context, index) {
-                      String info = filtered[index];
-                      String lot = info.substring(0, 2);
-                      String space = info.substring(3, 5);
-                      // return Text('$lot $space');
-                      return ListTile(
-                        onTap: () {
-                          database.child('/$lot/$space/').update({
-                            'name': '${NameController.text}',
-                            'plate number': '${NumberPlateController.text}',
-                            'occupied': true
-                          });
-                        },
-                        leading: Icon(Icons.car_rental),
-                        title: Text('Parking lot $lot: $space'),
-                      );
-                    },
-                    itemCount: filtered.length,
-                  );
-                }
-                return Text('hfda');
-              },
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Text('Name:'),
+            TextField(
+              controller: NameController,
             ),
-          )
-        ],
+            Text('Number plate:'),
+            TextField(
+              controller: NumberPlateController,
+            ),
+            Center(
+              child: Text(
+                  'Enter your name and number plate above, then click the lot below to book it'),
+            ),
+            Container(
+              height: height * 0.6,
+              child: StreamBuilder(
+                stream: database.onValue,
+                builder: (context, AsyncSnapshot<DatabaseEvent> snapshot) {
+                  if (snapshot.hasData) {
+                    final data = snapshot.data!.snapshot.value as Map;
+                    List filtered = [];
+                    data.forEach((key, value) {
+                      final parkingLot = key;
+                      final lot = value as Map;
+                      lot.forEach((key, value) {
+                        final number = key;
+                        if (value['occupied'] == false) {
+                          filtered.add('$parkingLot $number');
+                        }
+                      });
+                    });
+                    return ListView.builder(
+                      itemBuilder: (context, index) {
+                        String info = filtered[index];
+                        String lot = info.substring(0, 2);
+                        String space = info.substring(3, 5);
+                        // return Text('$lot $space');
+                        return ListTile(
+                          onTap: () {
+                            database.child('/$lot/$space/').update({
+                              'name': '${NameController.text}',
+                              'plate number': '${NumberPlateController.text}',
+                              'occupied': true
+                            });
+                          },
+                          leading: Icon(Icons.car_rental),
+                          title: Text('Parking lot $lot: $space'),
+                        );
+                      },
+                      itemCount: filtered.length,
+                    );
+                  }
+                  return Text('hfda');
+                },
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
